@@ -86,5 +86,8 @@ String? _onSchemaUnionFactoryName(
       'RunStepDetailsToolCallsCodeOutputImageObject' => 'image',
       'RunStepDetailsMessageCreationObject' => 'messageCreation',
       'RunStepDetailsToolCallsObject' => 'toolCalls',
+      // Audio
+      'CreateTranscriptionRequestModelEnumeration' => 'model',
+      'CreateTranscriptionRequestModelString' => 'modelId',
       _ => null,
     };

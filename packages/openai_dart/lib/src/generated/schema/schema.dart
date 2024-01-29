@@ -40,6 +40,8 @@ part 'chat_completion_stream_message_tool_call_chunk.dart';
 part 'completion_usage.dart';
 part 'create_embedding_request.dart';
 part 'create_embedding_response.dart';
+part 'create_transcription_request.dart';
+part 'create_transcription_response.dart';
 part 'embedding.dart';
 part 'embedding_usage.dart';
 part 'create_fine_tuning_job_request.dart';

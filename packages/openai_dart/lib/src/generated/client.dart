@@ -438,6 +438,30 @@ class OpenAIClient {
   }
 
   // ------------------------------------------
+  // METHOD: createTranscription
+  // ------------------------------------------
+
+  /// Transcribes audio into the input language.
+  ///
+  /// `request`: No description
+  ///
+  /// `POST` `https://api.openai.com/v1/audio/transcriptions`
+  Future<CreateTranscriptionResponse> createTranscription({
+    required List<http.MultipartFile> request,
+  }) async {
+    final r = await makeRequest(
+      baseUrl: 'https://api.openai.com/v1',
+      path: '/audio/transcriptions',
+      method: HttpMethod.post,
+      isMultipart: true,
+      requestType: 'multipart/form-data',
+      responseType: 'application/json',
+      body: request,
+    );
+    return CreateTranscriptionResponse.fromJson(_jsonDecode(r));
+  }
+
+  // ------------------------------------------
   // METHOD: listPaginatedFineTuningJobs
   // ------------------------------------------
 

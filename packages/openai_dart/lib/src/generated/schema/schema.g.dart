@@ -1162,6 +1162,98 @@ const _$CreateEmbeddingResponseObjectEnumMap = {
   CreateEmbeddingResponseObject.list: 'list',
 };
 
+_$CreateTranscriptionRequestImpl _$$CreateTranscriptionRequestImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CreateTranscriptionRequestImpl(
+      file: json['file'] as String,
+      model: const _CreateTranscriptionRequestModelConverter()
+          .fromJson(json['model']),
+      language: json['language'] as String?,
+      prompt: json['prompt'] as String?,
+      responseFormat: $enumDecodeNullable(
+              _$CreateTranscriptionRequestResponseFormatEnumMap,
+              json['response_format']) ??
+          CreateTranscriptionRequestResponseFormat.json,
+      temperature: (json['temperature'] as num?)?.toDouble() ?? 0.0,
+    );
+
+Map<String, dynamic> _$$CreateTranscriptionRequestImplToJson(
+    _$CreateTranscriptionRequestImpl instance) {
+  final val = <String, dynamic>{
+    'file': instance.file,
+    'model': const _CreateTranscriptionRequestModelConverter()
+        .toJson(instance.model),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('language', instance.language);
+  writeNotNull('prompt', instance.prompt);
+  val['response_format'] = _$CreateTranscriptionRequestResponseFormatEnumMap[
+      instance.responseFormat]!;
+  val['temperature'] = instance.temperature;
+  return val;
+}
+
+const _$CreateTranscriptionRequestResponseFormatEnumMap = {
+  CreateTranscriptionRequestResponseFormat.json: 'json',
+  CreateTranscriptionRequestResponseFormat.text: 'text',
+  CreateTranscriptionRequestResponseFormat.srt: 'srt',
+  CreateTranscriptionRequestResponseFormat.verboseJson: 'verbose_json',
+  CreateTranscriptionRequestResponseFormat.vtt: 'vtt',
+};
+
+_$CreateTranscriptionRequestModelEnumerationImpl
+    _$$CreateTranscriptionRequestModelEnumerationImplFromJson(
+            Map<String, dynamic> json) =>
+        _$CreateTranscriptionRequestModelEnumerationImpl(
+          $enumDecode(
+              _$CreateTranscriptionRequestModelEnumEnumMap, json['value']),
+          $type: json['runtimeType'] as String?,
+        );
+
+Map<String, dynamic> _$$CreateTranscriptionRequestModelEnumerationImplToJson(
+        _$CreateTranscriptionRequestModelEnumerationImpl instance) =>
+    <String, dynamic>{
+      'value': _$CreateTranscriptionRequestModelEnumEnumMap[instance.value]!,
+      'runtimeType': instance.$type,
+    };
+
+const _$CreateTranscriptionRequestModelEnumEnumMap = {
+  CreateTranscriptionRequestModelEnum.whisper1: 'whisper-1',
+};
+
+_$CreateTranscriptionRequestModelStringImpl
+    _$$CreateTranscriptionRequestModelStringImplFromJson(
+            Map<String, dynamic> json) =>
+        _$CreateTranscriptionRequestModelStringImpl(
+          json['value'] as String,
+          $type: json['runtimeType'] as String?,
+        );
+
+Map<String, dynamic> _$$CreateTranscriptionRequestModelStringImplToJson(
+        _$CreateTranscriptionRequestModelStringImpl instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'runtimeType': instance.$type,
+    };
+
+_$CreateTranscriptionResponseImpl _$$CreateTranscriptionResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CreateTranscriptionResponseImpl(
+      text: json['text'] as String,
+    );
+
+Map<String, dynamic> _$$CreateTranscriptionResponseImplToJson(
+        _$CreateTranscriptionResponseImpl instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+    };
+
 _$EmbeddingImpl _$$EmbeddingImplFromJson(Map<String, dynamic> json) =>
     _$EmbeddingImpl(
       index: json['index'] as int,

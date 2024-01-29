@@ -12286,6 +12286,906 @@ abstract class _CreateEmbeddingResponse extends CreateEmbeddingResponse {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+CreateTranscriptionRequest _$CreateTranscriptionRequestFromJson(
+    Map<String, dynamic> json) {
+  return _CreateTranscriptionRequest.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CreateTranscriptionRequest {
+  /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+  String get file => throw _privateConstructorUsedError;
+
+  /// ID of the model to use. Only `whisper-1` is currently available.
+  @_CreateTranscriptionRequestModelConverter()
+  CreateTranscriptionRequestModel get model =>
+      throw _privateConstructorUsedError;
+
+  /// The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy and latency.
+  @JsonKey(includeIfNull: false)
+  String? get language => throw _privateConstructorUsedError;
+
+  /// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+  @JsonKey(includeIfNull: false)
+  String? get prompt => throw _privateConstructorUsedError;
+
+  /// The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
+  @JsonKey(name: 'response_format')
+  CreateTranscriptionRequestResponseFormat get responseFormat =>
+      throw _privateConstructorUsedError;
+
+  /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
+  double get temperature => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CreateTranscriptionRequestCopyWith<CreateTranscriptionRequest>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreateTranscriptionRequestCopyWith<$Res> {
+  factory $CreateTranscriptionRequestCopyWith(CreateTranscriptionRequest value,
+          $Res Function(CreateTranscriptionRequest) then) =
+      _$CreateTranscriptionRequestCopyWithImpl<$Res,
+          CreateTranscriptionRequest>;
+  @useResult
+  $Res call(
+      {String file,
+      @_CreateTranscriptionRequestModelConverter()
+      CreateTranscriptionRequestModel model,
+      @JsonKey(includeIfNull: false) String? language,
+      @JsonKey(includeIfNull: false) String? prompt,
+      @JsonKey(name: 'response_format')
+      CreateTranscriptionRequestResponseFormat responseFormat,
+      double temperature});
+
+  $CreateTranscriptionRequestModelCopyWith<$Res> get model;
+}
+
+/// @nodoc
+class _$CreateTranscriptionRequestCopyWithImpl<$Res,
+        $Val extends CreateTranscriptionRequest>
+    implements $CreateTranscriptionRequestCopyWith<$Res> {
+  _$CreateTranscriptionRequestCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? file = null,
+    Object? model = null,
+    Object? language = freezed,
+    Object? prompt = freezed,
+    Object? responseFormat = null,
+    Object? temperature = null,
+  }) {
+    return _then(_value.copyWith(
+      file: null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String,
+      model: null == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as CreateTranscriptionRequestModel,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
+      prompt: freezed == prompt
+          ? _value.prompt
+          : prompt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      responseFormat: null == responseFormat
+          ? _value.responseFormat
+          : responseFormat // ignore: cast_nullable_to_non_nullable
+              as CreateTranscriptionRequestResponseFormat,
+      temperature: null == temperature
+          ? _value.temperature
+          : temperature // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CreateTranscriptionRequestModelCopyWith<$Res> get model {
+    return $CreateTranscriptionRequestModelCopyWith<$Res>(_value.model,
+        (value) {
+      return _then(_value.copyWith(model: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$CreateTranscriptionRequestImplCopyWith<$Res>
+    implements $CreateTranscriptionRequestCopyWith<$Res> {
+  factory _$$CreateTranscriptionRequestImplCopyWith(
+          _$CreateTranscriptionRequestImpl value,
+          $Res Function(_$CreateTranscriptionRequestImpl) then) =
+      __$$CreateTranscriptionRequestImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String file,
+      @_CreateTranscriptionRequestModelConverter()
+      CreateTranscriptionRequestModel model,
+      @JsonKey(includeIfNull: false) String? language,
+      @JsonKey(includeIfNull: false) String? prompt,
+      @JsonKey(name: 'response_format')
+      CreateTranscriptionRequestResponseFormat responseFormat,
+      double temperature});
+
+  @override
+  $CreateTranscriptionRequestModelCopyWith<$Res> get model;
+}
+
+/// @nodoc
+class __$$CreateTranscriptionRequestImplCopyWithImpl<$Res>
+    extends _$CreateTranscriptionRequestCopyWithImpl<$Res,
+        _$CreateTranscriptionRequestImpl>
+    implements _$$CreateTranscriptionRequestImplCopyWith<$Res> {
+  __$$CreateTranscriptionRequestImplCopyWithImpl(
+      _$CreateTranscriptionRequestImpl _value,
+      $Res Function(_$CreateTranscriptionRequestImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? file = null,
+    Object? model = null,
+    Object? language = freezed,
+    Object? prompt = freezed,
+    Object? responseFormat = null,
+    Object? temperature = null,
+  }) {
+    return _then(_$CreateTranscriptionRequestImpl(
+      file: null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String,
+      model: null == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as CreateTranscriptionRequestModel,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String?,
+      prompt: freezed == prompt
+          ? _value.prompt
+          : prompt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      responseFormat: null == responseFormat
+          ? _value.responseFormat
+          : responseFormat // ignore: cast_nullable_to_non_nullable
+              as CreateTranscriptionRequestResponseFormat,
+      temperature: null == temperature
+          ? _value.temperature
+          : temperature // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CreateTranscriptionRequestImpl extends _CreateTranscriptionRequest {
+  const _$CreateTranscriptionRequestImpl(
+      {required this.file,
+      @_CreateTranscriptionRequestModelConverter() required this.model,
+      @JsonKey(includeIfNull: false) this.language,
+      @JsonKey(includeIfNull: false) this.prompt,
+      @JsonKey(name: 'response_format')
+      this.responseFormat = CreateTranscriptionRequestResponseFormat.json,
+      this.temperature = 0.0})
+      : super._();
+
+  factory _$CreateTranscriptionRequestImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$CreateTranscriptionRequestImplFromJson(json);
+
+  /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+  @override
+  final String file;
+
+  /// ID of the model to use. Only `whisper-1` is currently available.
+  @override
+  @_CreateTranscriptionRequestModelConverter()
+  final CreateTranscriptionRequestModel model;
+
+  /// The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy and latency.
+  @override
+  @JsonKey(includeIfNull: false)
+  final String? language;
+
+  /// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+  @override
+  @JsonKey(includeIfNull: false)
+  final String? prompt;
+
+  /// The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
+  @override
+  @JsonKey(name: 'response_format')
+  final CreateTranscriptionRequestResponseFormat responseFormat;
+
+  /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
+  @override
+  @JsonKey()
+  final double temperature;
+
+  @override
+  String toString() {
+    return 'CreateTranscriptionRequest(file: $file, model: $model, language: $language, prompt: $prompt, responseFormat: $responseFormat, temperature: $temperature)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateTranscriptionRequestImpl &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.prompt, prompt) || other.prompt == prompt) &&
+            (identical(other.responseFormat, responseFormat) ||
+                other.responseFormat == responseFormat) &&
+            (identical(other.temperature, temperature) ||
+                other.temperature == temperature));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, file, model, language, prompt, responseFormat, temperature);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateTranscriptionRequestImplCopyWith<_$CreateTranscriptionRequestImpl>
+      get copyWith => __$$CreateTranscriptionRequestImplCopyWithImpl<
+          _$CreateTranscriptionRequestImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CreateTranscriptionRequestImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CreateTranscriptionRequest extends CreateTranscriptionRequest {
+  const factory _CreateTranscriptionRequest(
+      {required final String file,
+      @_CreateTranscriptionRequestModelConverter()
+      required final CreateTranscriptionRequestModel model,
+      @JsonKey(includeIfNull: false) final String? language,
+      @JsonKey(includeIfNull: false) final String? prompt,
+      @JsonKey(name: 'response_format')
+      final CreateTranscriptionRequestResponseFormat responseFormat,
+      final double temperature}) = _$CreateTranscriptionRequestImpl;
+  const _CreateTranscriptionRequest._() : super._();
+
+  factory _CreateTranscriptionRequest.fromJson(Map<String, dynamic> json) =
+      _$CreateTranscriptionRequestImpl.fromJson;
+
+  @override
+
+  /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+  String get file;
+  @override
+
+  /// ID of the model to use. Only `whisper-1` is currently available.
+  @_CreateTranscriptionRequestModelConverter()
+  CreateTranscriptionRequestModel get model;
+  @override
+
+  /// The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy and latency.
+  @JsonKey(includeIfNull: false)
+  String? get language;
+  @override
+
+  /// An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+  @JsonKey(includeIfNull: false)
+  String? get prompt;
+  @override
+
+  /// The format of the transcript output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
+  @JsonKey(name: 'response_format')
+  CreateTranscriptionRequestResponseFormat get responseFormat;
+  @override
+
+  /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
+  double get temperature;
+  @override
+  @JsonKey(ignore: true)
+  _$$CreateTranscriptionRequestImplCopyWith<_$CreateTranscriptionRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+CreateTranscriptionRequestModel _$CreateTranscriptionRequestModelFromJson(
+    Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'model':
+      return CreateTranscriptionRequestModelEnumeration.fromJson(json);
+    case 'modelId':
+      return CreateTranscriptionRequestModelString.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(
+          json,
+          'runtimeType',
+          'CreateTranscriptionRequestModel',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
+}
+
+/// @nodoc
+mixin _$CreateTranscriptionRequestModel {
+  Object get value => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CreateTranscriptionRequestModelEnum value) model,
+    required TResult Function(String value) modelId,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CreateTranscriptionRequestModelEnum value)? model,
+    TResult? Function(String value)? modelId,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CreateTranscriptionRequestModelEnum value)? model,
+    TResult Function(String value)? modelId,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CreateTranscriptionRequestModelEnumeration value)
+        model,
+    required TResult Function(CreateTranscriptionRequestModelString value)
+        modelId,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CreateTranscriptionRequestModelEnumeration value)? model,
+    TResult? Function(CreateTranscriptionRequestModelString value)? modelId,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CreateTranscriptionRequestModelEnumeration value)? model,
+    TResult Function(CreateTranscriptionRequestModelString value)? modelId,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreateTranscriptionRequestModelCopyWith<$Res> {
+  factory $CreateTranscriptionRequestModelCopyWith(
+          CreateTranscriptionRequestModel value,
+          $Res Function(CreateTranscriptionRequestModel) then) =
+      _$CreateTranscriptionRequestModelCopyWithImpl<$Res,
+          CreateTranscriptionRequestModel>;
+}
+
+/// @nodoc
+class _$CreateTranscriptionRequestModelCopyWithImpl<$Res,
+        $Val extends CreateTranscriptionRequestModel>
+    implements $CreateTranscriptionRequestModelCopyWith<$Res> {
+  _$CreateTranscriptionRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$CreateTranscriptionRequestModelEnumerationImplCopyWith<$Res> {
+  factory _$$CreateTranscriptionRequestModelEnumerationImplCopyWith(
+          _$CreateTranscriptionRequestModelEnumerationImpl value,
+          $Res Function(_$CreateTranscriptionRequestModelEnumerationImpl)
+              then) =
+      __$$CreateTranscriptionRequestModelEnumerationImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CreateTranscriptionRequestModelEnum value});
+}
+
+/// @nodoc
+class __$$CreateTranscriptionRequestModelEnumerationImplCopyWithImpl<$Res>
+    extends _$CreateTranscriptionRequestModelCopyWithImpl<$Res,
+        _$CreateTranscriptionRequestModelEnumerationImpl>
+    implements _$$CreateTranscriptionRequestModelEnumerationImplCopyWith<$Res> {
+  __$$CreateTranscriptionRequestModelEnumerationImplCopyWithImpl(
+      _$CreateTranscriptionRequestModelEnumerationImpl _value,
+      $Res Function(_$CreateTranscriptionRequestModelEnumerationImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$CreateTranscriptionRequestModelEnumerationImpl(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as CreateTranscriptionRequestModelEnum,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CreateTranscriptionRequestModelEnumerationImpl
+    extends CreateTranscriptionRequestModelEnumeration {
+  const _$CreateTranscriptionRequestModelEnumerationImpl(this.value,
+      {final String? $type})
+      : $type = $type ?? 'model',
+        super._();
+
+  factory _$CreateTranscriptionRequestModelEnumerationImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$CreateTranscriptionRequestModelEnumerationImplFromJson(json);
+
+  @override
+  final CreateTranscriptionRequestModelEnum value;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'CreateTranscriptionRequestModel.model(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateTranscriptionRequestModelEnumerationImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateTranscriptionRequestModelEnumerationImplCopyWith<
+          _$CreateTranscriptionRequestModelEnumerationImpl>
+      get copyWith =>
+          __$$CreateTranscriptionRequestModelEnumerationImplCopyWithImpl<
+                  _$CreateTranscriptionRequestModelEnumerationImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CreateTranscriptionRequestModelEnum value) model,
+    required TResult Function(String value) modelId,
+  }) {
+    return model(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CreateTranscriptionRequestModelEnum value)? model,
+    TResult? Function(String value)? modelId,
+  }) {
+    return model?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CreateTranscriptionRequestModelEnum value)? model,
+    TResult Function(String value)? modelId,
+    required TResult orElse(),
+  }) {
+    if (model != null) {
+      return model(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CreateTranscriptionRequestModelEnumeration value)
+        model,
+    required TResult Function(CreateTranscriptionRequestModelString value)
+        modelId,
+  }) {
+    return model(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CreateTranscriptionRequestModelEnumeration value)? model,
+    TResult? Function(CreateTranscriptionRequestModelString value)? modelId,
+  }) {
+    return model?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CreateTranscriptionRequestModelEnumeration value)? model,
+    TResult Function(CreateTranscriptionRequestModelString value)? modelId,
+    required TResult orElse(),
+  }) {
+    if (model != null) {
+      return model(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CreateTranscriptionRequestModelEnumerationImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class CreateTranscriptionRequestModelEnumeration
+    extends CreateTranscriptionRequestModel {
+  const factory CreateTranscriptionRequestModelEnumeration(
+          final CreateTranscriptionRequestModelEnum value) =
+      _$CreateTranscriptionRequestModelEnumerationImpl;
+  const CreateTranscriptionRequestModelEnumeration._() : super._();
+
+  factory CreateTranscriptionRequestModelEnumeration.fromJson(
+          Map<String, dynamic> json) =
+      _$CreateTranscriptionRequestModelEnumerationImpl.fromJson;
+
+  @override
+  CreateTranscriptionRequestModelEnum get value;
+  @JsonKey(ignore: true)
+  _$$CreateTranscriptionRequestModelEnumerationImplCopyWith<
+          _$CreateTranscriptionRequestModelEnumerationImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreateTranscriptionRequestModelStringImplCopyWith<$Res> {
+  factory _$$CreateTranscriptionRequestModelStringImplCopyWith(
+          _$CreateTranscriptionRequestModelStringImpl value,
+          $Res Function(_$CreateTranscriptionRequestModelStringImpl) then) =
+      __$$CreateTranscriptionRequestModelStringImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String value});
+}
+
+/// @nodoc
+class __$$CreateTranscriptionRequestModelStringImplCopyWithImpl<$Res>
+    extends _$CreateTranscriptionRequestModelCopyWithImpl<$Res,
+        _$CreateTranscriptionRequestModelStringImpl>
+    implements _$$CreateTranscriptionRequestModelStringImplCopyWith<$Res> {
+  __$$CreateTranscriptionRequestModelStringImplCopyWithImpl(
+      _$CreateTranscriptionRequestModelStringImpl _value,
+      $Res Function(_$CreateTranscriptionRequestModelStringImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$CreateTranscriptionRequestModelStringImpl(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CreateTranscriptionRequestModelStringImpl
+    extends CreateTranscriptionRequestModelString {
+  const _$CreateTranscriptionRequestModelStringImpl(this.value,
+      {final String? $type})
+      : $type = $type ?? 'modelId',
+        super._();
+
+  factory _$CreateTranscriptionRequestModelStringImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$CreateTranscriptionRequestModelStringImplFromJson(json);
+
+  @override
+  final String value;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'CreateTranscriptionRequestModel.modelId(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateTranscriptionRequestModelStringImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateTranscriptionRequestModelStringImplCopyWith<
+          _$CreateTranscriptionRequestModelStringImpl>
+      get copyWith => __$$CreateTranscriptionRequestModelStringImplCopyWithImpl<
+          _$CreateTranscriptionRequestModelStringImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CreateTranscriptionRequestModelEnum value) model,
+    required TResult Function(String value) modelId,
+  }) {
+    return modelId(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CreateTranscriptionRequestModelEnum value)? model,
+    TResult? Function(String value)? modelId,
+  }) {
+    return modelId?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CreateTranscriptionRequestModelEnum value)? model,
+    TResult Function(String value)? modelId,
+    required TResult orElse(),
+  }) {
+    if (modelId != null) {
+      return modelId(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CreateTranscriptionRequestModelEnumeration value)
+        model,
+    required TResult Function(CreateTranscriptionRequestModelString value)
+        modelId,
+  }) {
+    return modelId(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CreateTranscriptionRequestModelEnumeration value)? model,
+    TResult? Function(CreateTranscriptionRequestModelString value)? modelId,
+  }) {
+    return modelId?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CreateTranscriptionRequestModelEnumeration value)? model,
+    TResult Function(CreateTranscriptionRequestModelString value)? modelId,
+    required TResult orElse(),
+  }) {
+    if (modelId != null) {
+      return modelId(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CreateTranscriptionRequestModelStringImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class CreateTranscriptionRequestModelString
+    extends CreateTranscriptionRequestModel {
+  const factory CreateTranscriptionRequestModelString(final String value) =
+      _$CreateTranscriptionRequestModelStringImpl;
+  const CreateTranscriptionRequestModelString._() : super._();
+
+  factory CreateTranscriptionRequestModelString.fromJson(
+          Map<String, dynamic> json) =
+      _$CreateTranscriptionRequestModelStringImpl.fromJson;
+
+  @override
+  String get value;
+  @JsonKey(ignore: true)
+  _$$CreateTranscriptionRequestModelStringImplCopyWith<
+          _$CreateTranscriptionRequestModelStringImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+CreateTranscriptionResponse _$CreateTranscriptionResponseFromJson(
+    Map<String, dynamic> json) {
+  return _CreateTranscriptionResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CreateTranscriptionResponse {
+  /// No Description
+  String get text => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CreateTranscriptionResponseCopyWith<CreateTranscriptionResponse>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreateTranscriptionResponseCopyWith<$Res> {
+  factory $CreateTranscriptionResponseCopyWith(
+          CreateTranscriptionResponse value,
+          $Res Function(CreateTranscriptionResponse) then) =
+      _$CreateTranscriptionResponseCopyWithImpl<$Res,
+          CreateTranscriptionResponse>;
+  @useResult
+  $Res call({String text});
+}
+
+/// @nodoc
+class _$CreateTranscriptionResponseCopyWithImpl<$Res,
+        $Val extends CreateTranscriptionResponse>
+    implements $CreateTranscriptionResponseCopyWith<$Res> {
+  _$CreateTranscriptionResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+  }) {
+    return _then(_value.copyWith(
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CreateTranscriptionResponseImplCopyWith<$Res>
+    implements $CreateTranscriptionResponseCopyWith<$Res> {
+  factory _$$CreateTranscriptionResponseImplCopyWith(
+          _$CreateTranscriptionResponseImpl value,
+          $Res Function(_$CreateTranscriptionResponseImpl) then) =
+      __$$CreateTranscriptionResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String text});
+}
+
+/// @nodoc
+class __$$CreateTranscriptionResponseImplCopyWithImpl<$Res>
+    extends _$CreateTranscriptionResponseCopyWithImpl<$Res,
+        _$CreateTranscriptionResponseImpl>
+    implements _$$CreateTranscriptionResponseImplCopyWith<$Res> {
+  __$$CreateTranscriptionResponseImplCopyWithImpl(
+      _$CreateTranscriptionResponseImpl _value,
+      $Res Function(_$CreateTranscriptionResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+  }) {
+    return _then(_$CreateTranscriptionResponseImpl(
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CreateTranscriptionResponseImpl extends _CreateTranscriptionResponse {
+  const _$CreateTranscriptionResponseImpl({required this.text}) : super._();
+
+  factory _$CreateTranscriptionResponseImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$CreateTranscriptionResponseImplFromJson(json);
+
+  /// No Description
+  @override
+  final String text;
+
+  @override
+  String toString() {
+    return 'CreateTranscriptionResponse(text: $text)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateTranscriptionResponseImpl &&
+            (identical(other.text, text) || other.text == text));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, text);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateTranscriptionResponseImplCopyWith<_$CreateTranscriptionResponseImpl>
+      get copyWith => __$$CreateTranscriptionResponseImplCopyWithImpl<
+          _$CreateTranscriptionResponseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CreateTranscriptionResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CreateTranscriptionResponse
+    extends CreateTranscriptionResponse {
+  const factory _CreateTranscriptionResponse({required final String text}) =
+      _$CreateTranscriptionResponseImpl;
+  const _CreateTranscriptionResponse._() : super._();
+
+  factory _CreateTranscriptionResponse.fromJson(Map<String, dynamic> json) =
+      _$CreateTranscriptionResponseImpl.fromJson;
+
+  @override
+
+  /// No Description
+  String get text;
+  @override
+  @JsonKey(ignore: true)
+  _$$CreateTranscriptionResponseImplCopyWith<_$CreateTranscriptionResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 Embedding _$EmbeddingFromJson(Map<String, dynamic> json) {
   return _Embedding.fromJson(json);
 }
