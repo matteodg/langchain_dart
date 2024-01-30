@@ -158,6 +158,7 @@ class OpenAIClient {
     Map<String, dynamic> queryParams = const {},
     Map<String, String> headerParams = const {},
     bool isMultipart = false,
+    Map<String, String> fields = const {},
     String requestType = '',
     String responseType = '',
     Object? body,
@@ -216,6 +217,7 @@ class OpenAIClient {
       // Handle multipart request
       request = http.MultipartRequest(method.name, uri);
       request = request as http.MultipartRequest;
+      request.fields.addAll(fields);
       if (body is List<http.MultipartFile>) {
         request.files.addAll(body);
       } else {
@@ -319,6 +321,7 @@ class OpenAIClient {
     required HttpMethod method,
     Map<String, dynamic> queryParams = const {},
     Map<String, String> headerParams = const {},
+    Map<String, String> fields = const {},
     bool isMultipart = false,
     String requestType = '',
     String responseType = '',
@@ -333,6 +336,8 @@ class OpenAIClient {
         method: method,
         queryParams: queryParams,
         headerParams: headerParams,
+        fields: fields,
+        isMultipart: isMultipart,
         requestType: requestType,
         responseType: responseType,
         body: body,
@@ -448,11 +453,13 @@ class OpenAIClient {
   /// `POST` `https://api.openai.com/v1/audio/transcriptions`
   Future<CreateTranscriptionResponse> createTranscription({
     required List<http.MultipartFile> request,
+    Map<String, String> fields = const {},
   }) async {
     final r = await makeRequest(
       baseUrl: 'https://api.openai.com/v1',
       path: '/audio/transcriptions',
       method: HttpMethod.post,
+      fields: fields,
       isMultipart: true,
       requestType: 'multipart/form-data',
       responseType: 'application/json',
