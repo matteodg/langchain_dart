@@ -6,5 +6,6 @@ export 'package:openai_dart/openai_dart.dart' show OpenAIClientException;
 export 'src/agents/agents.dart';
 export 'src/chains/chains.dart';
 export 'src/chat_models/chat_models.dart';
+export 'src/documents/loaders/loaders.dart';
 export 'src/embeddings/embeddings.dart';
 export 'src/llms/llms.dart';
