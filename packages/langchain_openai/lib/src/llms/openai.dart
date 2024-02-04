@@ -188,6 +188,7 @@ class OpenAI extends BaseLLM<OpenAIOptions> {
       maxTokens: 256,
     ),
     this.encoding,
+    this.callbacks = const [],
   }) : _client = OpenAIClient(
           apiKey: apiKey ?? '',
           organization: organization,
@@ -196,6 +197,7 @@ class OpenAI extends BaseLLM<OpenAIOptions> {
           queryParams: queryParams,
           client: client,
         );
+  final List<LLMManagerMixin> callbacks;
 
   /// A client for interacting with OpenAI API.
   final OpenAIClient _client;
@@ -234,10 +236,13 @@ class OpenAI extends BaseLLM<OpenAIOptions> {
     final String prompt, {
     final OpenAIOptions? options,
   }) async {
+    callbacks.forEach((e) => e.onLLMStart(prompt, options));
     final completion = await _client.createCompletion(
       request: _createCompletionRequest(prompt, options: options),
     );
-    return completion.toLLMResult();
+    final llmResult = completion.toLLMResult();
+    callbacks.forEach((e) => e.onLLMEnd(llmResult));
+    return llmResult;
   }
 
   @override
@@ -273,14 +278,12 @@ class OpenAI extends BaseLLM<OpenAIOptions> {
       ),
       prompt: CompletionPrompt.string(prompt),
       bestOf: options?.bestOf ?? defaultOptions.bestOf,
-      frequencyPenalty:
-          options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
+      frequencyPenalty: options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
       logitBias: options?.logitBias ?? defaultOptions.logitBias,
       logprobs: options?.logprobs ?? defaultOptions.logprobs,
       maxTokens: options?.maxTokens ?? defaultOptions.maxTokens,
       n: options?.n ?? defaultOptions.n,
-      presencePenalty:
-          options?.presencePenalty ?? defaultOptions.presencePenalty,
+      presencePenalty: options?.presencePenalty ?? defaultOptions.presencePenalty,
       seed: options?.seed ?? defaultOptions.seed,
       stop: (options?.stop ?? defaultOptions.stop) != null
           ? CompletionStop.listString(options?.stop ?? defaultOptions.stop!)

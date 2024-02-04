@@ -194,6 +194,7 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
       model: 'gpt-3.5-turbo',
     ),
     this.encoding,
+    this.callbacks = const [],
   }) : _client = OpenAIClient(
           apiKey: apiKey ?? '',
           organization: organization,
@@ -202,6 +203,7 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
           queryParams: queryParams,
           client: client,
         );
+  final List<ChatModelManagerMixin> callbacks;
 
   /// A client for interacting with OpenAI API.
   final OpenAIClient _client;
@@ -243,10 +245,13 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
     final List<ChatMessage> messages, {
     final ChatOpenAIOptions? options,
   }) async {
+    callbacks.forEach((e) => e.onChatModelStart(messages, options));
     final completion = await _client.createChatCompletion(
       request: _createChatCompletionRequest(messages, options: options),
     );
-    return completion.toChatResult(completion.id ?? _uuid.v4());
+    final chatResult = completion.toChatResult(completion.id ?? _uuid.v4());
+    callbacks.forEach((e) => e.onChatModelEnd(chatResult));
+    return chatResult;
   }
 
   @override
@@ -262,8 +267,7 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
           ),
         )
         .map(
-          (final completion) =>
-              completion.toChatResult(completion.id ?? _uuid.v4()),
+          (final completion) => completion.toChatResult(completion.id ?? _uuid.v4()),
         );
   }
 
@@ -283,13 +287,10 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
     final ChatOpenAIOptions? options,
   }) {
     final messagesDtos = messages.toChatCompletionMessages();
-    final functionsDtos = options?.functions?.toFunctionObjects() ??
-        defaultOptions.functions?.toFunctionObjects();
-    final functionCall =
-        options?.functionCall?.toChatCompletionFunctionCall() ??
-            defaultOptions.functionCall?.toChatCompletionFunctionCall();
-    final responseFormat =
-        options?.responseFormat ?? defaultOptions.responseFormat;
+    final functionsDtos = options?.functions?.toFunctionObjects() ?? defaultOptions.functions?.toFunctionObjects();
+    final functionCall = options?.functionCall?.toChatCompletionFunctionCall() ??
+        defaultOptions.functionCall?.toChatCompletionFunctionCall();
+    final responseFormat = options?.responseFormat ?? defaultOptions.responseFormat;
     final responseFormatDto = responseFormat?.toChatCompletionResponseFormat();
 
     return CreateChatCompletionRequest(
@@ -299,13 +300,11 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
       messages: messagesDtos,
       functions: functionsDtos,
       functionCall: functionCall,
-      frequencyPenalty:
-          options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
+      frequencyPenalty: options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
       logitBias: options?.logitBias ?? defaultOptions.logitBias,
       maxTokens: options?.maxTokens ?? defaultOptions.maxTokens,
       n: options?.n ?? defaultOptions.n,
-      presencePenalty:
-          options?.presencePenalty ?? defaultOptions.presencePenalty,
+      presencePenalty: options?.presencePenalty ?? defaultOptions.presencePenalty,
       responseFormat: responseFormatDto,
       seed: options?.seed ?? defaultOptions.seed,
       stop: (options?.stop ?? defaultOptions.stop) != null
@@ -335,8 +334,7 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
     final PromptValue promptValue, {
     final ChatOpenAIOptions? options,
   }) async {
-    final model =
-        options?.model ?? defaultOptions.model ?? throwNullModelError();
+    final model = options?.model ?? defaultOptions.model ?? throwNullModelError();
     final tiktoken = _getTiktoken();
     final messages = promptValue.toChatMessages();
 
@@ -380,12 +378,9 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
         final AIChatMessage msg => tiktoken.encode('assistant').length +
             (msg.functionCall != null
                 ? tiktoken.encode(msg.functionCall!.name).length +
-                    tiktoken
-                        .encode(msg.functionCall!.arguments.toString())
-                        .length
+                    tiktoken.encode(msg.functionCall!.arguments.toString()).length
                 : 0),
-        final FunctionChatMessage msg =>
-          tiktoken.encode(msg.name).length + tokensPerName,
+        final FunctionChatMessage msg => tiktoken.encode(msg.name).length + tokensPerName,
         final CustomChatMessage msg => tiktoken.encode(msg.role).length,
       };
     }
@@ -396,9 +391,7 @@ class ChatOpenAI extends BaseChatModel<ChatOpenAIOptions> {
 
   /// Returns the tiktoken model to use for the given model.
   Tiktoken _getTiktoken() {
-    return encoding != null
-        ? getEncoding(encoding!)
-        : getEncoding('cl100k_base');
+    return encoding != null ? getEncoding(encoding!) : getEncoding('cl100k_base');
   }
 
   /// Closes the client and cleans up any resources associated with it.
