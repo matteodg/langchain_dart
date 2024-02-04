@@ -2,6 +2,7 @@
 library;
 
 export 'src/agents/agents.dart';
+export 'src/callbacks/callbacks.dart';
 export 'src/chains/chains.dart';
 export 'src/core/core.dart';
 export 'src/documents/documents.dart';
