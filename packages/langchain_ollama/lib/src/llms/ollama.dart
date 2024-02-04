@@ -153,12 +153,14 @@ class Ollama extends BaseLLM<OllamaOptions> {
       model: 'llama2',
     ),
     this.encoding = 'cl100k_base',
+    this.callbacks = const [],
   }) : _client = OllamaClient(
           baseUrl: baseUrl,
           headers: headers,
           queryParams: queryParams,
           client: client,
         );
+  final List<LLMManagerMixin> callbacks;
 
   /// A client for interacting with Ollama API.
   final OllamaClient _client;
@@ -180,10 +182,13 @@ class Ollama extends BaseLLM<OllamaOptions> {
     final String prompt, {
     final OllamaOptions? options,
   }) async {
+    callbacks.forEach((e) => e.onLLMStart(prompt, options));
     final completion = await _client.generateCompletion(
       request: _generateCompletionRequest(prompt, options: options),
     );
-    return completion.toLLMResult();
+    final llmResult = completion.toLLMResult();
+    callbacks.forEach((e) => e.onLLMEnd(llmResult));
+    return llmResult;
   }
 
   @override
@@ -193,8 +198,7 @@ class Ollama extends BaseLLM<OllamaOptions> {
   }) {
     return _client
         .generateCompletionStream(
-          request:
-              _generateCompletionRequest(input.toString(), options: options),
+          request: _generateCompletionRequest(input.toString(), options: options),
         )
         .map((final completion) => completion.toLLMResult(streaming: true));
   }
@@ -236,15 +240,12 @@ class Ollama extends BaseLLM<OllamaOptions> {
         repeatLastN: options?.repeatLastN ?? defaultOptions.repeatLastN,
         temperature: options?.temperature ?? defaultOptions.temperature,
         repeatPenalty: options?.repeatPenalty ?? defaultOptions.repeatPenalty,
-        presencePenalty:
-            options?.presencePenalty ?? defaultOptions.presencePenalty,
-        frequencyPenalty:
-            options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
+        presencePenalty: options?.presencePenalty ?? defaultOptions.presencePenalty,
+        frequencyPenalty: options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
         mirostat: options?.mirostat ?? defaultOptions.mirostat,
         mirostatTau: options?.mirostatTau ?? defaultOptions.mirostatTau,
         mirostatEta: options?.mirostatEta ?? defaultOptions.mirostatEta,
-        penalizeNewline:
-            options?.penalizeNewline ?? defaultOptions.penalizeNewline,
+        penalizeNewline: options?.penalizeNewline ?? defaultOptions.penalizeNewline,
         stop: options?.stop ?? defaultOptions.stop,
         numa: options?.numa ?? defaultOptions.numa,
         numCtx: options?.numCtx ?? defaultOptions.numCtx,
@@ -259,10 +260,8 @@ class Ollama extends BaseLLM<OllamaOptions> {
         useMmap: options?.useMmap ?? defaultOptions.useMmap,
         useMlock: options?.useMlock ?? defaultOptions.useMlock,
         embeddingOnly: options?.embeddingOnly ?? defaultOptions.embeddingOnly,
-        ropeFrequencyBase:
-            options?.ropeFrequencyBase ?? defaultOptions.ropeFrequencyBase,
-        ropeFrequencyScale:
-            options?.ropeFrequencyScale ?? defaultOptions.ropeFrequencyScale,
+        ropeFrequencyBase: options?.ropeFrequencyBase ?? defaultOptions.ropeFrequencyBase,
+        ropeFrequencyScale: options?.ropeFrequencyScale ?? defaultOptions.ropeFrequencyScale,
         numThread: options?.numThread ?? defaultOptions.numThread,
       ),
     );

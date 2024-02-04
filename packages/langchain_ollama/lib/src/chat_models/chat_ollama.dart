@@ -153,12 +153,14 @@ class ChatOllama extends BaseChatModel<ChatOllamaOptions> {
       model: 'llama2',
     ),
     this.encoding = 'cl100k_base',
+    this.callbacks = const [],
   }) : _client = OllamaClient(
           baseUrl: baseUrl,
           headers: headers,
           queryParams: queryParams,
           client: client,
         );
+  final List<ChatModelManagerMixin> callbacks;
 
   /// A client for interacting with Ollama API.
   final OllamaClient _client;
@@ -183,6 +185,7 @@ class ChatOllama extends BaseChatModel<ChatOllamaOptions> {
     final List<ChatMessage> messages, {
     final ChatOllamaOptions? options,
   }) async {
+    callbacks.forEach((e) => e.onChatModelStart(messages, options));
     final id = _uuid.v4();
     final completion = await _client.generateChatCompletion(
       request: _generateCompletionRequest(
@@ -190,7 +193,9 @@ class ChatOllama extends BaseChatModel<ChatOllamaOptions> {
         options: options,
       ),
     );
-    return completion.toChatResult(id);
+    final chatResult = completion.toChatResult(id);
+    callbacks.forEach((e) => e.onChatModelEnd(chatResult));
+    return chatResult;
   }
 
   @override
@@ -244,15 +249,12 @@ class ChatOllama extends BaseChatModel<ChatOllamaOptions> {
         repeatLastN: options?.repeatLastN ?? defaultOptions.repeatLastN,
         temperature: options?.temperature ?? defaultOptions.temperature,
         repeatPenalty: options?.repeatPenalty ?? defaultOptions.repeatPenalty,
-        presencePenalty:
-            options?.presencePenalty ?? defaultOptions.presencePenalty,
-        frequencyPenalty:
-            options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
+        presencePenalty: options?.presencePenalty ?? defaultOptions.presencePenalty,
+        frequencyPenalty: options?.frequencyPenalty ?? defaultOptions.frequencyPenalty,
         mirostat: options?.mirostat ?? defaultOptions.mirostat,
         mirostatTau: options?.mirostatTau ?? defaultOptions.mirostatTau,
         mirostatEta: options?.mirostatEta ?? defaultOptions.mirostatEta,
-        penalizeNewline:
-            options?.penalizeNewline ?? defaultOptions.penalizeNewline,
+        penalizeNewline: options?.penalizeNewline ?? defaultOptions.penalizeNewline,
         stop: options?.stop ?? defaultOptions.stop,
         numa: options?.numa ?? defaultOptions.numa,
         numCtx: options?.numCtx ?? defaultOptions.numCtx,
@@ -267,10 +269,8 @@ class ChatOllama extends BaseChatModel<ChatOllamaOptions> {
         useMmap: options?.useMmap ?? defaultOptions.useMmap,
         useMlock: options?.useMlock ?? defaultOptions.useMlock,
         embeddingOnly: options?.embeddingOnly ?? defaultOptions.embeddingOnly,
-        ropeFrequencyBase:
-            options?.ropeFrequencyBase ?? defaultOptions.ropeFrequencyBase,
-        ropeFrequencyScale:
-            options?.ropeFrequencyScale ?? defaultOptions.ropeFrequencyScale,
+        ropeFrequencyBase: options?.ropeFrequencyBase ?? defaultOptions.ropeFrequencyBase,
+        ropeFrequencyScale: options?.ropeFrequencyScale ?? defaultOptions.ropeFrequencyScale,
         numThread: options?.numThread ?? defaultOptions.numThread,
       ),
     );
